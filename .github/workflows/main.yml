@@ -36,10 +36,6 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Install dependencies 👨🏻‍💻
-        run: |
-          npm install
-
       - name: Deploy
         run: |
           npx bohr deploy
