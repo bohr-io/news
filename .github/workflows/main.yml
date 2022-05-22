@@ -1,47 +1,10 @@
-name: News
-
-on:
-  push:
-    branches:
-      - main
-
+name: bohr.io deploy
+on: push
+permissions: write-all
 jobs:
-
   deploy:
+    name: Deploy on bohr.io
     runs-on: ubuntu-latest
-
     steps:
-
-      - name: Checkout Action 🛎
-        uses: actions/checkout@v2
-
-      - name: Setup node env 🏗
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: |
-            ~/.npm
-            /home/runner/.cache
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Deploy
-        run: |
-          npx bohr deploy
-        env:
-          DEPLOY_PATH: './'
-          PUBLIC_PATH: './'
-          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
-          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
-          BOHR_TOKEN: ${{ secrets.BOHR_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: bohr-io/action@main
