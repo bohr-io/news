@@ -1,4 +1,4 @@
-name: bohr.io deploy
+name: bohr.io deploy [NPM]
 on: push
 permissions: write-all
 jobs:
