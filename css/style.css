@@ -78,6 +78,7 @@ body {
 .landing-description {
   max-width: 700px;
   font-size: 36px;
+  font-weight: 700;
   font-family: "Helvetica Light";
 }
 
